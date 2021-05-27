@@ -1,25 +1,26 @@
 package org.adridadou.ethereum.propeller.rpc;
 
-import org.adridadou.ethereum.propeller.EthereumConfig;
-
 import java.util.concurrent.TimeUnit;
+
+import org.adridadou.ethereum.propeller.EthereumConfig;
+import org.adridadou.ethereum.propeller.values.GasPrice;
 
 /**
  * Created by davidroon on 25.04.17.
  * This code is released under Apache 2 license
  */
 public final class EthereumRpcConfig extends EthereumConfig {
-    private final boolean pollBlocks;
-    private final long pollingFrequence;
+	private final boolean pollBlocks;
+    private final long pollingInterval;
     private final AuthenticationType authType;
     private final String userName;
     private final String password;
 
-
-    private EthereumRpcConfig(boolean pollBlocks, long pollingFrequence, String swarmUrl, long blockWait, AuthenticationType authType, String userName, String password) {
-        super(swarmUrl, blockWait);
-        this.pollBlocks = pollBlocks;
-        this.pollingFrequence = pollingFrequence;
+    private EthereumRpcConfig(boolean pollBlocks, long pollingInterval, String swarmUrl, long blockWait, GasPrice gasPrice,
+            AuthenticationType authType, String userName, String password) {
+        super(swarmUrl, blockWait, gasPrice);
+		this.pollBlocks = pollBlocks;
+        this.pollingInterval = pollingInterval;
         this.authType = authType;
         this.userName = userName;
         this.password = password;
@@ -29,12 +30,12 @@ public final class EthereumRpcConfig extends EthereumConfig {
         return new Builder();
     }
 
-    public boolean isPollBlocks() {
-        return pollBlocks;
-    }
+	public boolean isPollBlocks() {
+		return pollBlocks;
+	}
 
-    public long getPollingFrequence() {
-        return pollingFrequence;
+    public long getPollingInterval() {
+        return pollingInterval;
     }
 
     public AuthenticationType getAuthType() {
@@ -50,24 +51,24 @@ public final class EthereumRpcConfig extends EthereumConfig {
     }
 
     public static class Builder extends EthereumConfig.Builder {
-        private boolean pollBlocks;
-        private long pollingFrequence = 100;
+		private boolean pollBlocks;
+    	private long pollingInterval = 10000;
         private AuthenticationType authType = AuthenticationType.NoAuth;
         private String password;
         private String userName;
 
-        public Builder pollBlocks(boolean value) {
-            this.pollBlocks = value;
+		public Builder pollBlocks(boolean value) {
+			this.pollBlocks = value;
+			return this;
+		}
+
+        public Builder pollingInterval(long frequence) {
+            this.pollingInterval = frequence;
             return this;
         }
 
-        public Builder pollingFrequence(long frequence) {
-            this.pollingFrequence = frequence;
-            return this;
-        }
-
-        public Builder pollingFrequence(long amount, TimeUnit unit) {
-            this.pollingFrequence = unit.toMillis(amount);
+        public Builder pollingInterval(long amount, TimeUnit unit) {
+            this.pollingInterval = unit.toMillis(amount);
             return this;
         }
 
@@ -79,7 +80,7 @@ public final class EthereumRpcConfig extends EthereumConfig {
         }
 
         public EthereumRpcConfig build() {
-            return new EthereumRpcConfig(pollBlocks, pollingFrequence, swarmUrl, blockWaitLimit, authType, userName, password);
+            return new EthereumRpcConfig(pollBlocks, pollingInterval, swarmUrl, blockWaitLimit, gasPrice, authType, userName, password);
         }
     }
 }
