@@ -14,53 +14,64 @@
         <connection>scm:git:https://github.com/{github-user}/{github-repo}.git</connection>
         <developerConnection>scm:git:git@github.com:adridadou/eth-propeller-core.git</developerConnection>
         <url>https://github.com/adridadou/eth-propeller-core</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <distributionManagement>
         <repository>
-            <id>bintray-cubefriendly-maven</id>
-            <name>Cubefriendly maven repo</name>
-            <url>https://api.bintray.com/maven/cubefriendly/maven/eth-propeller-core</url>
+            <id>github</id>
+            <name>GitHub OpenLaw Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/openlawteam/eth-propeller-core</url>
         </repository>
     </distributionManagement>
 
     <repositories>
 
         <repository>
-            <id>Adridadou</id>
-            <name>Repository from Bintray for Adridadou</name>
-            <url>http://dl.bintray.com/cubefriendly/maven</url>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/openlawteam/ethereumj</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>github solcj</id>
+            <url>https://maven.pkg.github.com/openlawteam/solcJ</url>
+        </repository>
+
+        <repository>
+            <id>mvnrepository.com</id>
+            <name>Repository from Maven</name>
+            <url>https://mvnrepository.com/artifact</url>
+            <layout>default</layout>
         </repository>
 
         <repository>
             <id>oss.jfrog.org</id>
-            <name>Repository from Bintray</name>
-            <url>http://dl.bintray.com/ethereum/maven</url>
+            <name>Repository from jfrog</name>
+            <url>https://oss.jfrog.org/artifactory/libs-snapshot</url>
         </repository>
 
         <repository>
-            <id>oss.jfrog.org2</id>
-            <name>Repository from Bintray</name>
-            <url>http://oss.jfrog.org/oss-snapshot-local</url>
+            <id>nexus.nuls.center</id>
+            <name>Repository from Nuls</name>
+            <url>http://nexus.nuls.center/nexus/content/repositories/public</url>
         </repository>
 
         <repository>
-            <id>oss.jfrog.org3</id>
-            <name>Repository from Bintray</name>
-            <url>http://dl.bintray.com/web3j/maven</url>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url> <!-- the https you've been looking for -->
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled> <!-- or set to false if desired, default is true https://stackoverflow.com/a/61684539/32453 -->
+            </snapshots>
         </repository>
 
         <repository>
-            <id>oss.jfrog.org4</id>
-            <name>Repository from Bintray</name>
-            <url>http://dl.bintray.com/openlawbot/forks</url>
-        </repository>
-
-        <repository>
-            <id>oss.jfrog.org5</id>
-            <name>Repository from Bintray</name>
-            <url>https://jcenter.bintray.com</url>
+            <id>central1</id>
+            <url>https://repo1.maven.org/maven2</url>
         </repository>
 
     </repositories>
@@ -183,9 +194,16 @@
         <dependency>
             <groupId>org.ethereum</groupId>
             <artifactId>ethereumj-core</artifactId>
-            <version>1.12.0-RELEASE</version>
+            <version>1.13.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- <dependency>
+            <groupId>org.ethereum</groupId>
+            <artifactId>solcj-all</artifactId>
+            <version>0.4.25</version>
+            <scope>test</scope>
+        </dependency> -->
 
         <dependency>
             <groupId>junit</groupId>
@@ -194,6 +212,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>3.1.0</version>
@@ -262,8 +281,8 @@
                 <artifactId>jgitflow-maven-plugin</artifactId>
                 <version>1.0-m5.1</version>
                 <configuration>
-					<pushReleases>true</pushReleases>
-					<allowUntracked>true</allowUntracked>
+                    <pushReleases>true</pushReleases>
+                    <allowUntracked>true</allowUntracked>
                     <!-- see goals wiki page for configuration options -->
                 </configuration>
             </plugin>
@@ -302,4 +321,5 @@
             <!-- enable scalatest -->
         </plugins>
     </build>
+
 </project>

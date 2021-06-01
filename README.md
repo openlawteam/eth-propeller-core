@@ -54,6 +54,11 @@ EthereumFacade is your interface to Ethereum. This is how you interact with it:
 - Interface with a smart contract
 
 
+
+## Install
+
+> mvn install -s .settings.xml
+
 ## Testing
 
 To run the project tests, install maven and then run `mvn clean test.`
@@ -62,3 +67,7 @@ In order to run unit tests on a mocked Ethereum network, please use eth-propelle
 
 
 **Note**: Ethereumj's license is LPGL3. So make sure that your license is compatible with LPGL3 if you want to use ethereumJ for something else than testing
+## Deploy to GH Package
+
+> mvn deploy -s .settings.xml
+
